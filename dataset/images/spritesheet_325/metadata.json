@@ -1,0 +1,25 @@
+{
+  "frames": 25,
+  "frame_size": {
+    "width": 204,
+    "height": 155
+  },
+  "animation": {
+    "speed": 9,
+    "loop": true
+  },
+  "grid": {
+    "columns": 5,
+    "rows": 5,
+    "separation": {
+      "x": 0,
+      "y": 0
+    },
+    "offset": {
+      "left": 3,
+      "right": 1,
+      "top": 0,
+      "bottom": 249
+    }
+  }
+}
