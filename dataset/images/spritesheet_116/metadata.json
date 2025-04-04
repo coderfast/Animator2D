@@ -1,0 +1,23 @@
+{
+  "frames": 32,
+  "frame_size": {
+    "width": 256,
+    "height": 128
+  },
+  "animation": {
+    "speed": 4,
+    "loop": true
+  },
+  "grid": {
+    "columns": 4,
+    "rows": 8,
+    "separation": {
+      "x": 0,
+      "y": 0
+    },
+    "offset": {
+      "x": 0,
+      "y": 0
+    }
+  }
+}

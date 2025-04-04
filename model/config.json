@@ -1,0 +1,14 @@
+{
+  "model_type": "Animator2D",
+  "base_model": "bert-base-uncased",
+  "image_size": 64,
+  "text_embedding_dim": 768,
+  "image_embedding_dim": 128,
+  "hidden_size": 256,
+  "num_lstm_layers": 2,
+  "output_channels": 3,
+  "output_height": 64,
+  "output_width": 64,
+  "output_frame_size": 12288,
+  "version": "1.0.0"
+}
