@@ -12,8 +12,8 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(f"Utilizzo dispositivo: {device}")
 
 # Percorsi locali
-metadata_path = '/Users/lorenzo/Documents/GitHub/Animator2D/sprite_metadata.json'
-images_dir = '/Users/lorenzo/Documents/GitHub/Animator2D/images'
+metadata_path = '/Users/lorenzo/Documents/GitHub/Animator2D/dataset/sprite_metadata.json'
+images_dir = '/Users/lorenzo/Documents/GitHub/Animator2D/dataset/images'
 
 # Funzione per caricare i metadati
 def load_metadata(metadata_path):
