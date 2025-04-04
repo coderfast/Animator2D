@@ -64,7 +64,7 @@ def generate_animation(description, base_frame_image, num_frames):
         # Carica il modello da file locale
         model = Animator2DModel().to(device)
         logger.info("Modello inizializzato, caricamento pesi da file locale...")
-        local_weights_path = "/Users/lorenzo/Documents/GitHub/Animator2D/Animator2D-v1.0.0/Animator2D-v1.0.0.pth"
+        local_weights_path = "/Users/lorenzo/Documents/GitHub/Animator2D/model/Animator2D.pth"
         try:
             model.load_state_dict(torch.load(local_weights_path, map_location=device))
             logger.info("Pesi caricati correttamente.")

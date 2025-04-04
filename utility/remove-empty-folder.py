@@ -11,5 +11,5 @@ def remove_empty_folders(base_dir):
             print(f"Removed empty folder: {folder_name}")
 
 if __name__ == "__main__":
-    images_dir = "/Users/lorenzo/Documents/GitHub/Animator2D/images"
+    images_dir = "/Users/lorenzo/Documents/GitHub/Animator2D/dataset/images"
     remove_empty_folders(images_dir)

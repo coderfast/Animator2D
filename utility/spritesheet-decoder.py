@@ -29,7 +29,7 @@ class SpriteSheetDecoder:
         # Directory delle immagini
         current_dir = os.path.dirname(os.path.abspath(__file__))
         parent_dir = os.path.dirname(current_dir)
-        self.images_dir = os.path.join(parent_dir, "images")
+        self.images_dir = os.path.join(parent_dir, "dataset/images")
         os.makedirs(self.images_dir, exist_ok=True)
         self.registry_file = os.path.join(self.images_dir, "sprite_registry.json")
         self.load_registry()

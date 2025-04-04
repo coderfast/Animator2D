@@ -2,10 +2,10 @@ import os
 import shutil
 
 # Percorso della cartella sorgente
-images_dir = "/Users/lorenzo/Documents/GitHub/Animator2D/images"
+images_dir = "/Users/lorenzo/Documents/GitHub/Animator2D/dataset/images"
 
 # Percorso della cartella destinazione
-destination_dir = "/Users/lorenzo/Documents/GitHub/sprite-animation"
+destination_dir = "/Users/lorenzo/Documents/GitHub/Animator2D/dataset/train"
 
 # Controlla se la cartella sorgente esiste
 if not os.path.exists(images_dir):

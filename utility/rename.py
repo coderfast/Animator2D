@@ -36,5 +36,5 @@ def rename_folders_and_frames(base_dir):
                 print(f"Renamed {file_name} -> {new_name}")
 
 if __name__ == "__main__":
-    images_dir = "/Users/lorenzo/Documents/GitHub/Animator2D/images"
+    images_dir = "/Users/lorenzo/Documents/GitHub/Animator2D/dataset/images"
     rename_folders_and_frames(images_dir)
