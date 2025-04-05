@@ -40,7 +40,6 @@ class SpriteSheetDecoder:
         self.sheet_list = tk.Listbox(self.left_frame, width=10, selectmode=tk.SINGLE)
         self.sheet_list.pack(fill=tk.Y, expand=True)
         self.sheet_list.bind('<<ListboxSelect>>', self.load_sprite_sheet)
-        tk.Button(self.left_frame, text="Aggiungi", command=self.add_sheets).pack()
         
         # Pannello centrale
         self.center_frame = tk.Frame(root)
@@ -168,6 +167,44 @@ class SpriteSheetDecoder:
         tk.Radiobutton(self.red_type_frame, text="Lowest Number", variable=self.red_type_var, value="lowest", bg='#2d2d2d', fg='#ffffff', selectcolor='#3d3d3d', font=('Arial', 10)).pack(anchor=tk.W)
         tk.Radiobutton(self.red_type_frame, text="Closest to Last Cut", variable=self.red_type_var, value="closest", bg='#2d2d2d', fg='#ffffff', selectcolor='#3d3d3d', font=('Arial', 10)).pack(anchor=tk.W)
 
+        # Progress Bar Frame
+        self.progress_frame = tk.Frame(self.right_frame, bg='#2d2d2d')
+        self.progress_frame.pack(pady=10, fill=tk.BOTH, expand=True)
+        
+        tk.Label(self.progress_frame, text="Progress:", font=('Arial', 12), bg='#2d2d2d', fg='#ffffff').pack(anchor=tk.W, pady=(0, 5))
+        
+        # Progress Bar Container (for visual border)
+        progress_container = tk.Frame(self.progress_frame, bg='#3d3d3d', bd=1, relief=tk.SUNKEN)
+        progress_container.pack(side=tk.TOP, fill=tk.BOTH, expand=True, padx=10, pady=5)
+        
+        # Vertical progress bar using Canvas
+        self.progress_height = 200  # Fixed height for the progress bar
+        self.progress_canvas = tk.Canvas(
+            progress_container, 
+            width=30, 
+            height=self.progress_height, 
+            bg='#1e1e1e', 
+            highlightthickness=0
+        )
+        self.progress_canvas.pack(side=tk.TOP, pady=5)
+        
+        # Progress bar fill
+        self.progress_fill = self.progress_canvas.create_rectangle(
+            0, self.progress_height, 30, self.progress_height, 
+            fill='#27ae60', outline=''
+        )
+        
+        # Progress text
+        self.progress_text = tk.StringVar(value="0 / 559")
+        self.progress_label = tk.Label(
+            self.progress_frame, 
+            textvariable=self.progress_text, 
+            font=('Arial', 10), 
+            bg='#2d2d2d', 
+            fg='#ffffff'
+        )
+        self.progress_label.pack(side=tk.TOP, pady=5)
+
         # Variabile per memorizzare i parametri della griglia precedente
         self.previous_grid_params = None
         
@@ -178,6 +215,12 @@ class SpriteSheetDecoder:
         self.canvas.bind('<MouseWheel>', self.handle_zoom)  # Windows e macOS
         self.canvas.bind('<Button-4>', self.handle_zoom)    # Linux scroll up
         self.canvas.bind('<Button-5>', self.handle_zoom)    # Linux scroll down
+
+        # Carica direttamente i fogli dalle immagini all'avvio
+        self.add_sheets()
+        
+        # Inizializza la barra di progresso dopo che tutto è stato caricato
+        self.root.after(500, self.update_progress_bar)
 
     def load_registry(self):
         self.registry = set()
@@ -209,6 +252,8 @@ class SpriteSheetDecoder:
             self.path_mapping[str(number)] = path
             self.sheet_list.insert(tk.END, str(number))
         self.update_list_colors()
+        # Update progress bar after list has been populated
+        self.root.after(100, self.update_progress_bar)  # Slight delay to ensure UI is ready
         self.load_next_uncut_sprite()
     
     def load_sprite_sheet(self, event):
@@ -504,6 +549,7 @@ class SpriteSheetDecoder:
         self.registry.add(number)
         self.save_registry()
         self.update_list_colors()
+        self.update_progress_bar()  # Aggiorna la barra di progresso
         self.load_next_uncut_sprite()
     
     def skip_sprite(self):
@@ -755,6 +801,46 @@ class SpriteSheetDecoder:
             self.params[key].insert(0, value)
         
         self.update_grid(None)
+
+    def update_progress_bar(self):
+        """Aggiorna la barra di progresso verticale."""
+        try:
+            # Conta le sottocartelle "spritesheet_*"
+            spritesheet_folders = [d for d in os.listdir(self.images_dir) 
+                                  if os.path.isdir(os.path.join(self.images_dir, d)) 
+                                  and d.startswith("spritesheet_")]
+            
+            cut_count = len(spritesheet_folders)
+            total_count = 559  # Valore fisso come richiesto
+            
+            # Aggiorna il testo
+            self.progress_text.set(f"{cut_count} / {total_count}")
+            
+            # Calcola la percentuale di completamento
+            if total_count > 0:
+                percentage = min(cut_count / total_count, 1.0)
+            else:
+                percentage = 0
+                
+            # Aggiorna la barra di progresso (cresce dal basso verso l'alto)
+            fill_height = int(self.progress_height * percentage)
+            self.progress_canvas.coords(
+                self.progress_fill, 
+                0, self.progress_height - fill_height, 
+                30, self.progress_height
+            )
+            
+            # Colora la barra in base alla percentuale
+            if percentage < 0.33:
+                color = '#e74c3c'  # Rosso per progresso basso
+            elif percentage < 0.66:
+                color = '#f39c12'  # Arancione per progresso medio
+            else:
+                color = '#27ae60'  # Verde per progresso alto
+                
+            self.progress_canvas.itemconfig(self.progress_fill, fill=color)
+        except Exception as e:
+            print(f"Error updating progress bar: {e}")
 
 if __name__ == "__main__":
     root = tk.Tk()
