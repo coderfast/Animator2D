@@ -32,7 +32,10 @@ class SpriteSheetDecoder:
         self.images_dir = os.path.join(parent_dir, "dataset/images")
         os.makedirs(self.images_dir, exist_ok=True)
         self.registry_file = os.path.join(self.images_dir, "sprite_registry.json")
+        self.sprite_metadata_file = os.path.join(self.images_dir, "sprite_metadata.json")
+        self.total_sprites_count = 559  # Default value if metadata file doesn't exist
         self.load_registry()
+        self.load_sprite_metadata()
         
         # Pannello sinistro
         self.left_frame = tk.Frame(root)
@@ -232,9 +235,30 @@ class SpriteSheetDecoder:
                 self.skipped_registry = set(data.get('skipped', []))
     
     def save_registry(self):
+        """Salva il registro dei fogli elaborati e saltati nel file JSON"""
         with open(self.registry_file, 'w') as f:
-            json.dump({'cut': list(self.registry), 'skipped': list(self.skipped_registry)}, f)
+            json.dump({
+                'cut': list(self.registry), 
+                'skipped': list(self.skipped_registry)
+            }, f)
     
+    def load_sprite_metadata(self):
+        """Carica il conteggio totale degli sprite dal file di metadati"""
+        if os.path.exists(self.sprite_metadata_file):
+            try:
+                with open(self.sprite_metadata_file, 'r') as f:
+                    metadata = json.load(f)
+                    # Assume that the metadata file contains a key 'total' or 'count'
+                    # Adjust this based on the actual structure of your sprite_metadata.json
+                    if 'total' in metadata:
+                        self.total_sprites_count = metadata['total']
+                    elif 'count' in metadata:
+                        self.total_sprites_count = metadata['count']
+                    print(f"Loaded total sprite count: {self.total_sprites_count}")
+            except Exception as e:
+                print(f"Error loading sprite metadata: {e}")
+                # Keep the default value if there's an error
+
     def update_list_colors(self):
         for i in range(self.sheet_list.size()):
             number = self.sheet_list.get(i)
@@ -430,7 +454,7 @@ class SpriteSheetDecoder:
                 )
         
         # Evidenzia il frame corrente (se in modalità preview)
-        if self.sprite_frames and hasattr(self, 'current_frame_idx'):
+        if self.sprite_frames and hasattr(self, 'current_frame_idx') and params["Horizontal"] > 0:
             current_row = self.current_frame_idx // params["Horizontal"]
             current_col = self.current_frame_idx % params["Horizontal"]
             
@@ -501,7 +525,18 @@ class SpriteSheetDecoder:
         number = self.sheet_list.get(selection[0])
         folder = os.path.join(self.images_dir, f"spritesheet_{number}")  # Usa il nuovo schema per le sottocartelle
         os.makedirs(folder, exist_ok=True)
-        params = {k: int(v.get() or 0) for k, v in self.params.items()}
+        
+        try:
+            params = {k: int(v.get() or 0) for k, v in self.params.items()}
+        except ValueError:
+            messagebox.showerror("Errore", "Inserisci solo numeri interi.")
+            return
+            
+        # Verifica che i parametri siano validi
+        if params["Horizontal"] <= 0 or params["Vertical"] <= 0:
+            messagebox.showerror("Errore", "Il numero di colonne e righe deve essere maggiore di zero.")
+            return
+            
         w, h = self.image.size
         total_width = w - params["Offset_left"] - params["Offset_right"] - (params["Horizontal"] - 1) * params["Separation_h"]
         total_height = h - params["Offset_top"] - params["Offset_bottom"] - (params["Vertical"] - 1) * params["Separation_v"]
@@ -811,7 +846,7 @@ class SpriteSheetDecoder:
                                   and d.startswith("spritesheet_")]
             
             cut_count = len(spritesheet_folders)
-            total_count = 559  # Valore fisso come richiesto
+            total_count = self.total_sprites_count  # Use the value from metadata instead of hardcoded 559
             
             # Aggiorna il testo
             self.progress_text.set(f"{cut_count} / {total_count}")
