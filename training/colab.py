@@ -11,6 +11,37 @@ It is compatible with Google Colab and handles the local dataset located in /con
 import os
 print("Checking environment and installing dependencies...")
 
+# Install required packages for Google Colab
+try:
+    import google.colab
+    IN_COLAB = True
+    # Install dependencies
+    !pip install torch torchvision transformers Pillow tqdm matplotlib tensorboard scikit-image imageio
+    print("Google Colab detected, dependencies installed.")
+    
+    # Instructions for dataset loading
+    print("""
+    DATASET LOADING INSTRUCTIONS:
+    -----------------------------
+    1. Upload the dataset manually: Click on the folder icon on the left sidebar, 
+       then upload the dataset to a folder named 'dataset/images'
+    
+    OR
+    
+    2. Mount Google Drive:
+       from google.colab import drive
+       drive.mount('/content/drive')
+       
+       Then copy your dataset to the correct location:
+       !cp -r /content/drive/MyDrive/path/to/dataset/images /content/dataset/images
+       
+    Make sure your dataset structure follows the required format with spritesheet_X folders 
+    containing frame_XX.png files and sprite_metadata.json in the dataset/images directory.
+    """)
+except ImportError:
+    IN_COLAB = False
+    print("Running in a local environment.")
+
 # Common imports for both environments
 # ==================================
 import torch
@@ -58,9 +89,9 @@ print(f"Using device: {device}")
 # ============
 class Config:
     # Dataset
-    DATA_DIR = '/Users/lorenzo/Documents/GitHub/Animator2D/dataset/images'
+    DATA_DIR = '/content/dataset/images' if IN_COLAB else '/Users/lorenzo/Documents/GitHub/Animator2D/dataset/images'
     METADATA_FILE = os.path.join('/content/dataset/sprite_metadata.json')
-    OUTPUT_DIR = './output'
+    OUTPUT_DIR = '/content/output' if IN_COLAB else './output'
     
     # Model
     MODEL_NAME = "Animator2D-v1.0.0"
