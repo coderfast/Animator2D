@@ -1,3 +1,14 @@
+#!/usr/bin/env python3
+"""
+Rename Script
+------------
+Questo script rinomina cartelle e file nel dataset secondo una convenzione standard.
+Converte i nomi delle cartelle in formato "spritesheet_X" e rinomina i frame contenuti
+in sequenza numerica ordinata partendo da 0 (frame_0.png, frame_1.png, ecc.).
+Questa standardizzazione è fondamentale per garantire la corretta organizzazione
+del dataset e permettere al modello di accedere ai dati in modo coerente.
+"""
+
 import os
 import math
 

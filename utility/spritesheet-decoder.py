@@ -1,3 +1,23 @@
+#!/usr/bin/env python3
+"""
+Spritesheet Decoder - Utilità per il ritaglio dei spritesheet
+-----------------------------------------------------------
+Questo script fornisce un'interfaccia grafica per suddividere gli spritesheet in singoli frame.
+Ispirato all'editor di Godot, permette di:
+
+1. Caricare un'immagine spritesheet contenente più frame di animazione
+2. Definire una griglia di ritaglio con parametri personalizzabili:
+   - Numero di righe e colonne
+   - Spaziatura orizzontale e verticale
+   - Offset dai bordi
+3. Visualizzare l'anteprima dell'animazione risultante
+4. Ritagliare i frame e salvarli in cartelle separate
+5. Tenere traccia degli spritesheet già elaborati
+
+Questo è uno strumento fondamentale nella pipeline di preparazione del dataset
+per l'addestramento del modello Animator2D.
+"""
+
 # File: SpriteSheetDecoderGodotStyle.py
 import tkinter as tk
 from tkinter import filedialog, messagebox
@@ -238,10 +258,10 @@ class SpriteSheetDecoder:
         """Salva il registro dei fogli elaborati e saltati nel file JSON"""
         with open(self.registry_file, 'w') as f:
             json.dump({
-                'cut': list(self.registry), 
-                'skipped': list(self.skipped_registry)
-            }, f)
-    
+                'cut': [str(x) for x in sorted(map(int, self.registry))], 
+                'skipped': [str(x) for x in sorted(map(int, self.skipped_registry))]
+            }, f, indent=2)
+
     def load_sprite_metadata(self):
         """Carica il conteggio totale degli sprite dal file di metadati"""
         if os.path.exists(self.sprite_metadata_file):

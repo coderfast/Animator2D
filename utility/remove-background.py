@@ -4,6 +4,8 @@ Remove Background Script
 ------------------------
 Questo script rimuove lo sfondo grigio da tutti i frame degli spritesheet nella cartella dataset.
 Il colore di sfondo è grigio ([128, 128, 128]) e viene rimosso rendendo quei pixel trasparenti.
+Le immagini originali vengono mantenute e le versioni con sfondo trasparente sono salvate in
+una nuova cartella 'image_transparent' dentro la directory dataset.
 """
 
 import os
@@ -13,6 +15,7 @@ import re
 import numpy as np
 from PIL import Image
 from pathlib import Path
+import shutil
 
 # Configurazione
 BACKGROUND_COLOR = [128, 128, 128]  # Colore di sfondo grigio
@@ -60,12 +63,13 @@ def remove_background(img):
     # Restituisci come immagine PIL
     return Image.fromarray(img_array)
 
-def process_spritesheet_frames(spritesheet_path, verbose=True, save=True):
+def process_spritesheet_frames(spritesheet_path, output_dir, verbose=True, save=True):
     """
     Processa tutti i frame in una cartella spritesheet per rimuovere lo sfondo.
     
     Args:
         spritesheet_path (str): Percorso alla cartella dello spritesheet
+        output_dir (str): Directory di output dove salvare i frame processati
         verbose (bool): Se True, stampa messaggi dettagliati
         save (bool): Se True, salva i frame con sfondo trasparente
     
@@ -85,6 +89,11 @@ def process_spritesheet_frames(spritesheet_path, verbose=True, save=True):
     if verbose:
         print(f"Processando {folder_name} ({len(frame_files)} frame)...")
     
+    # Crea directory di output corrispondente allo spritesheet
+    output_spritesheet_dir = os.path.join(output_dir, folder_name)
+    if save and not os.path.exists(output_spritesheet_dir):
+        os.makedirs(output_spritesheet_dir, exist_ok=True)
+    
     # Processa ogni frame
     processed_count = 0
     for frame_path in frame_files:
@@ -98,9 +107,11 @@ def process_spritesheet_frames(spritesheet_path, verbose=True, save=True):
                 # Rimuovi sfondo
                 processed_img = remove_background(img)
                 
-                # Salva l'immagine processata sovrascrivendo l'originale
+                # Salva l'immagine processata nella directory di output
                 if save:
-                    processed_img.save(frame_path)
+                    frame_name = os.path.basename(frame_path)
+                    output_path = os.path.join(output_spritesheet_dir, frame_name)
+                    processed_img.save(output_path)
                 
                 processed_count += 1
                 
@@ -130,6 +141,14 @@ def process_all_spritesheets(verbose=True, save=True):
         print(f"Errore: Directory delle immagini non trovata: {images_dir}")
         return 0, 0
     
+    # Crea directory di output per le immagini con sfondo trasparente
+    output_dir = os.path.join(parent_dir, "dataset", "image_transparent")
+    if save:
+        if not os.path.exists(output_dir):
+            os.makedirs(output_dir, exist_ok=True)
+        elif verbose:
+            print(f"La directory di output esiste già: {output_dir}")
+    
     # Trova tutte le cartelle spritesheet
     spritesheet_pattern = os.path.join(images_dir, "spritesheet_*")
     all_spritesheets = glob.glob(spritesheet_pattern)
@@ -143,7 +162,7 @@ def process_all_spritesheets(verbose=True, save=True):
     
     for spritesheet_path in all_spritesheets:
         frames_processed = process_spritesheet_frames(
-            spritesheet_path, verbose=verbose, save=save
+            spritesheet_path, output_dir, verbose=verbose, save=save
         )
         
         if frames_processed > 0:
@@ -169,6 +188,10 @@ def main():
         current_dir = os.path.dirname(os.path.abspath(__file__))
         parent_dir = os.path.dirname(current_dir)
         images_dir = os.path.join(parent_dir, "dataset", "images")
+        output_dir = os.path.join(parent_dir, "dataset", "image_transparent")
+        
+        if save and not os.path.exists(output_dir):
+            os.makedirs(output_dir, exist_ok=True)
         
         # Verifica se il path esiste, se no prova ad interpretarlo come numero
         spritesheet_path = args.folder
@@ -182,12 +205,12 @@ def main():
             spritesheet_path = os.path.join(images_dir, f"spritesheet_{spritesheet_path}")
         
         if os.path.exists(spritesheet_path):
-            frames_processed = process_spritesheet_frames(spritesheet_path, verbose=verbose, save=save)
+            frames_processed = process_spritesheet_frames(spritesheet_path, output_dir, verbose=verbose, save=save)
             if not args.quiet:
                 if args.dry_run:
                     print(f"Sarebbero stati processati {frames_processed} frame in {os.path.basename(spritesheet_path)}.")
                 else:
-                    print(f"Processati {frames_processed} frame in {os.path.basename(spritesheet_path)}.")
+                    print(f"Processati {frames_processed} frame in {os.path.basename(spritesheet_path)} e salvati in {output_dir}/{os.path.basename(spritesheet_path)}.")
         else:
             print(f"Errore: Spritesheet non trovato: {args.folder}")
             return
@@ -196,10 +219,12 @@ def main():
         processed_sheets, processed_frames = process_all_spritesheets(verbose=verbose, save=save)
         
         if not args.quiet:
+            output_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "dataset", "image_transparent")
             if args.dry_run:
                 print(f"Sarebbero stati processati {processed_frames} frame in {processed_sheets} spritesheet.")
             else:
                 print(f"Processati {processed_frames} frame in {processed_sheets} spritesheet.")
+                print(f"Le immagini con sfondo trasparente sono state salvate in: {output_dir}")
 
 if __name__ == "__main__":
     main()

@@ -1,4 +1,19 @@
 #!/usr/bin/env python3
+"""
+Check Metadata Script
+-------------------
+Questo script verifica e aggiorna il file sprite_registry.json confrontando
+il suo contenuto con le cartelle spritesheet_* effettivamente presenti nel dataset.
+Funzionalità principali:
+- Sincronizza il registro degli spritesheet elaborati con le cartelle esistenti
+- Identifica nuovi spritesheet aggiunti e spritesheet mancanti
+- Calcola e visualizza la percentuale di completamento del dataset
+- Supporta modalità forzata per rimuovere automaticamente riferimenti a file mancanti
+
+Questo strumento è essenziale per mantenere la coerenza tra i metadati e 
+i file effettivamente presenti nel dataset.
+"""
+
 import os
 import json
 import sys

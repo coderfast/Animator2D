@@ -1,11 +1,22 @@
+#!/usr/bin/env python3
+"""
+Dataset Uploader Script
+----------------------
+Questo script prepara il dataset di Animator2D per l'addestramento, copiando
+le immagini di sprite dalla cartella 'images' alla cartella 'train',
+mantenendo la struttura delle sottocartelle. È utile per preparare il dataset
+per l'addestramento in un formato standardizzato, garantendo che i file siano
+organizzati correttamente.
+"""
+
 import os
 import shutil
 
 # Percorso della cartella sorgente
-images_dir = "/Users/lorenzo/Documents/GitHub/Animator2D/dataset/images"
+images_dir = "/Users/lorenzo/Documents/GitHub/Animator2D/dataset/image_transparent"
 
 # Percorso della cartella destinazione
-destination_dir = "/Users/lorenzo/Documents/GitHub/Animator2D/dataset/train"
+destination_dir = "/Users/lorenzo/Documents/GitHub/Animator2D/dataset"
 
 # Controlla se la cartella sorgente esiste
 if not os.path.exists(images_dir):

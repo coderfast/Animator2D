@@ -1,3 +1,12 @@
+#!/usr/bin/env python3
+"""
+Remove Empty Folders Script
+--------------------------
+Questo script identifica e rimuove le cartelle vuote nel dataset di immagini.
+Quando si elaborano gli sprite o si rimuovono i frames di sfondo, alcune cartelle
+potrebbero rimanere vuote e questo script le pulisce automaticamente dal filesystem.
+"""
+
 import os
 
 def remove_empty_folders(base_dir):

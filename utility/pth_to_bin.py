@@ -1,3 +1,19 @@
+#!/usr/bin/env python3
+"""
+PTH to BIN Converter Script
+--------------------------
+Questo script converte il modello Animator2D dal formato nativo PyTorch (.pth) 
+al formato compatibile con Hugging Face (.bin). La conversione permette al modello 
+di essere facilmente caricato e utilizzato con le librerie Hugging Face Transformers, 
+facilitando la distribuzione e l'utilizzo del modello in diversi ambienti.
+
+Il processo:
+1. Carica il modello Animator2D salvato in formato .pth
+2. Ricrea l'architettura del modello (stessa struttura usata durante il training)
+3. Carica i pesi nel modello ricreato
+4. Salva il modello nel formato standard Hugging Face (pytorch_model.bin)
+"""
+
 import torch
 from transformers import BertModel
 import torch.nn as nn
