@@ -5,7 +5,14 @@ _Last update: 6 March 2025_
 
 Link to my Hugging Face account: [https://huggingface.co/Lod34](https://huggingface.co/Lod34)
 
+## Memory Management
+To track progress and manage project documentation, see:
+- [ProjectMemory.md](ProjectMemory.md): main memory with information, versions, logs and prompts.
+- [CHAT_MEMORY_GUIDE.md](CHAT_MEMORY_GUIDE.md): Guide to using and replicating MindChat .
+
 ## 🌟 Project Journey
+
+
 
 This project began as a passion for blending artificial intelligence with my love for indie games. I envisioned a system where developers could input a character description, action, direction, and frame count to produce pixel-art sprites with an ideal height of 35 pixels (within a 25-50 pixel range). What started as a straightforward idea has turned into a challenging journey of experimentation, setbacks, and learning. Here’s a detailed account of where I’ve been and where I’m headed.
 
