@@ -7,32 +7,32 @@
 - **Dataset**: 
   - Inizialmente: `pawkanarek/spraix_1024` (sprite con descrizioni, azioni, direzioni).
   - Attualmente: Dataset personalizzato `Lod34/sprite-animation` (derivato da *Gameface*), con sprite sheet tagliati in frame individuali e organizzati in cartelle. Include `sprite_metadata.json` con descrizioni e parametri, e cartella `images` con frame numerati. Sfondo rimosso dagli sprite per evitare distrazioni durante il training. Frame di background generati dal codice *Sprite Sheet Decoder* rimossi per correggere problemi di numerazione.
-- **Stato attuale**: Nessuna versione completamente funzionante. *v3.0.0-alpha* su Hugging Face Spaces (`Lod34/Animator2D`) è l'ultima, con pixel simili a sprite ma animazioni incoerenti. *v1.0.0* (locale, training completato, interfaccia in sviluppo) e *v1.1.0* (online su Hugging Face, in sviluppo).
+- **Stato attuale**: Nessuna versione completamente funzionante. *v3-alpha* su Hugging Face Spaces (`Lod34/Animator2D`) è l'ultima, con pixel simili a sprite ma animazioni incoerenti. *v1* (locale, training completato, interfaccia in sviluppo) e *v1.1* (online su Hugging Face, in sviluppo).
 - **Repository GitHub**: [https://github.com/Lod34/Animator2D](https://github.com/Lod34/Animator2D)
 
 ## Versioni del Progetto
-- **Animator2D-v1.0.0-alpha** (21-22 febbraio 2025): 
+- **Animator2D-v1-alpha** (21-22 febbraio 2025): 
   - Architettura: BERT come text encoder, conv generator per sprite 64x64.
   - Interfaccia: Gradio base con output simulati (cerchi gialli su sfondo blu).
   - Output: Pixel noise incoerenti.
   - Problemi: BERT non adatto per coerenza visiva, generator troppo semplice.
-- **Animator2D-mini-v1.0.0-alpha** (26 febbraio - 1 marzo 2025):
+- **Animator2D-mini-v1-alpha** (26 febbraio - 1 marzo 2025):
   - Architettura: CLIP come text encoder, generator leggero.
   - Varianti: 10e (10 epochs), 100e (100 epochs), 250e (250 epochs).
   - Output: Forme vaghe (10e), miglioramenti minimi (100e), parziale stabilità a 128x128 (250e), ma inutilizzabili.
   - Training: Batch size 8-16, learning rate 1e-4/2e-4.
   - Dataset: `pawkanarek/spraix_1024`.
-- **Animator2D-v2.0.0-alpha** (2-3 marzo 2025):
+- **Animator2D-v2-alpha** (2-3 marzo 2025):
   - Architettura: T5 come text encoder, Frame Interpolator per animazioni multi-frame, generator conv più complesso.
   - Interfaccia: Gradio avanzato.
   - Deployment: Hugging Face Spaces, problema con upload `.pth` errato ("yellow ball on blue background"), poi fixato ma animazioni incoerenti.
-- **Animator2D-v3.0.0-alpha** (6 marzo 2025):
+- **Animator2D-v3-alpha** (6 marzo 2025):
   - Architettura: T5, generator con Residual Blocks e Self-Attention per dettaglio e coerenza.
   - Training: AdamW, Cosine Annealing, 80/20 split su `pawkanarek/spraix_1024`.
   - Interfaccia: Gradio con controllo FPS e output GIF.
   - Output: Pixel sprite-like ma animazioni incoerenti.
   - Deployment: Hugging Face Spaces (`Lod34/Animator2D`).
-- **Animator2D-v1.0.0** (dal 6 marzo 2025):
+- **Animator2D-v1** (dal 6 marzo 2025):
   - Approccio: Modulare ispirato a Da Vinci Resolve:
     1. **Creation**: Creazione o importazione di uno sprite base (es. 64x64), possibilmente con Stable Diffusion per pixel-art o decomposizione personally in parti.
     2. **Animation**: Impostazione parametri (primo frame, azione, direzione, frame) per animare lo sprite.
@@ -45,21 +45,21 @@
     - Animazioni non generate: Frame output sono copie sfocate del primo frame, senza movimenti (es. archi, esplosioni).
   - Risultati: Training su 50 epoche con prestazioni pessime, nessuna animazione coerente.
   - Stato: Interfaccia in sviluppo, training code non funzionante.
-- **Animator2D-v1.1.0** (dal 6 aprile 2025):
+- **Animator2D-v1.1** (dal 6 aprile 2025):
   - Versione online su Hugging Face, utilizza dataset `Lod34/sprite-animation`.
   - Obiettivo: Accessibilità online senza setup locale.
   - Stato: In sviluppo.
 
 ## Log delle Attività
-- **21 febbraio 2025**: Inizio sviluppo Animator2D-v1.0.0-alpha.
-- **22 febbraio 2025**: Rilascio Animator2D-v1.0.0-alpha.
-- **26 febbraio 2025**: Inizio sviluppo Animator2D-mini-v1.0.0-alpha.
-- **1 marzo 2025**: Rilascio Animator2D-mini-v1.0.0-alpha.
-- **2 marzo 2025**: Inizio sviluppo Animator2D-v2.0.0-alpha.
-- **3 marzo 2025**: Rilascio Animator2D-v2.0.0-alpha.
-- **6 marzo 2025**: Rilascio Animator2D-v3.0.0-alpha e inizio sviluppo Animator2D-v1.0.0.
-- **6 aprile 2025**: Inizio sviluppo Animator2D-v1.1.0.
-- **30 aprile 2025**: Rimozione sfondo dagli sprite nel dataset e frame di background generati da *Sprite Sheet Decoder*. Completamento training code per *v1.0.0* con problemi (output disordinato risolto, perdita file in Colab, canale alpha, animazioni non generate).
+- **21 febbraio 2025**: Inizio sviluppo Animator2D-v1-alpha.
+- **22 febbraio 2025**: Rilascio Animator2D-v1-alpha.
+- **26 febbraio 2025**: Inizio sviluppo Animator2D-mini-v1-alpha.
+- **1 marzo 2025**: Rilascio Animator2D-mini-v1-alpha.
+- **2 marzo 2025**: Inizio sviluppo Animator2D-v2-alpha.
+- **3 marzo 2025**: Rilascio Animator2D-v2-alpha.
+- **6 marzo 2025**: Rilascio Animator2D-v3-alpha e inizio sviluppo Animator2D-v1.
+- **6 aprile 2025**: Inizio sviluppo Animator2D-v1.1.
+- **30 aprile 2025**: Rimozione sfondo dagli sprite nel dataset e frame di background generati da *Sprite Sheet Decoder*. Completamento training code per *v1* con problemi (output disordinato risolto, perdita file in Colab, canale alpha, animazioni non generate).
 
 ## Prompt Generati
 - **Prompt per continuare il lavoro**:

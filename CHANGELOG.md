@@ -2,8 +2,8 @@
 
 All notable changes to the *Animator2D* project are documented in this file. This project aims to generate pixel-art sprite animations from textual descriptions, evolving through multiple iterations to support indie game developers.
 
-## [Animator2D-v1.1.0] - In Development
-- **Development Started**: April 6, 2025 (post-v1.0.0 completion)
+## [Animator2D-v1.1] - In Development
+- **Development Started**: April 6, 2025 (post-v1 completion)
 - **Release**: Not yet released
 - **New Direction**:
   - Online version hosted on Hugging Face.
@@ -14,7 +14,7 @@ All notable changes to the *Animator2D* project are documented in this file. Thi
   - Goal: Make the tool accessible online without local setup.
 - **Status**: In progress, focusing on integration with Hugging Face infrastructure.
 
-## [Animator2D-v1.0.0] - In Development
+## [Animator2D-v1] - In Development
 - **Development Started**: March 6, 2025
 - **Release**: Not yet released
 - **New Features**:
@@ -32,11 +32,11 @@ All notable changes to the *Animator2D* project are documented in this file. Thi
   - Dataset frames mapped to base sprites and animation sequences.
 - **Status**: Training completed; interface in progress, not fully functional.
 
-## [Animator2D-v3.0.0-alpha] - 2025-03-06
+## [Animator2D-v3-alpha] - 2025-03-06
 - **Development Started**: March 6, 2025
 - **Release**: March 6, 2025
 - **Main Updates**:
-  - Fixed *v2.0.0-alpha* with partial code rewrite.
+  - Fixed *v2-alpha* with partial code rewrite.
   - Added Residual Blocks and Self-Attention to the generator for better detail and coherence.
   - Optimized Frame Interpolator for multi-frame animations (up to 16 frames, 256x256 pixels).
   - Used T5 as text encoder, trained with AdamW and Cosine Annealing on `pawkanarek/spraix_1024` (80/20 split).
@@ -45,11 +45,11 @@ All notable changes to the *Animator2D* project are documented in this file. Thi
   - Animations remained incoherent despite sprite-like pixels.
 - **Status**: Not functional, deployed on Hugging Face Spaces (`Lod34/Animator2D`).
 
-## [Animator2D-v2.0.0-alpha] - 2025-03-03
+## [Animator2D-v2-alpha] - 2025-03-03
 - **Development Started**: March 2, 2025
 - **Release**: March 3, 2025
 - **Main Updates**:
-  - Complete rewrite from v1.0.0-alpha.
+  - Complete rewrite from v1-alpha.
   - Introduced T5 text encoder and Frame Interpolator for multi-frame animations.
   - More complex generator architecture.
   - Enhanced Gradio interface.
@@ -57,11 +57,11 @@ All notable changes to the *Animator2D* project are documented in this file. Thi
   - Initial deployment on Hugging Face Spaces failed due to wrong `.pth` file upload, producing “yellow ball on blue” output. Fixed, but animations still incoherent.
 - **Status**: Not functional.
 
-## [Animator2D-mini-v1.0.0-alpha] - 2025-03-01
+## [Animator2D-mini-v1-alpha] - 2025-03-01
 - **Development Started**: February 26, 2025
 - **Release**: March 1, 2025
 - **Main Updates**:
-  - Simplified variant of v1.0.0-alpha for rapid testing.
+  - Simplified variant of v1-alpha for rapid testing.
   - Used CLIP as text encoder and a lightweight generator.
   - Variants:
     - *10e*: 10 epochs, batch size 8, learning rate 1e-4, 64x64 output, vague results.
@@ -72,7 +72,7 @@ All notable changes to the *Animator2D* project are documented in this file. Thi
   - Outputs lacked coherence for practical use.
 - **Status**: Not functional.
 
-## [Animator2D-v1.0.0-alpha] - 2025-02-22
+## [Animator2D-v1-alpha] - 2025-02-22
 - **Development Started**: February 21, 2025
 - **Release**: February 22, 2025
 - **Main Updates**:
@@ -86,5 +86,5 @@ All notable changes to the *Animator2D* project are documented in this file. Thi
 ---
 
 **Notes**:  
-- Early versions (v1.0.0-alpha to v3.0.0-alpha) were experimental and non-functional, using `pawkanarek/spraix_1024` sprite sheets as-is, with limitations in frame organization and pixel scaling.  
-- v1.0.0 and v1.1.0 introduce a custom dataset (`Lod34/sprite-animation`) to address these issues, splitting v1.0.0 for local use (training done, interface in progress) and v1.1.0 for online deployment (in development).
+- Early versions (v1-alpha to v3-alpha) were experimental and non-functional, using `pawkanarek/spraix_1024` sprite sheets as-is, with limitations in frame organization and pixel scaling.  
+- v1 and v1.1 introduce a custom dataset (`Lod34/sprite-animation`) to address these issues, splitting v1 for local use (training done, interface in progress) and v1.1 for online deployment (in development).
