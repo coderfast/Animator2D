@@ -8,7 +8,7 @@ All notable changes to the *Animator2D* project are documented in this file. Thi
 - **New Direction**:
   - Online version hosted on Hugging Face.
   - Utilizes Hugging Face for dataset access and deploys the Gradio interface via a Hugging Face Space.
-  - Uses a custom dataset (`Lod34/sprite-animation`, [link](https://huggingface.co/datasets/Lod34/sprite-animation)), derived from `pawkanarek/spraix_1024` by addressing its issues:
+  - Uses a custom dataset (`Loacky/sprite-animation`, [link](https://huggingface.co/datasets/Loacky/sprite-animation)), derived from `pawkanarek/spraix_1024` by addressing its issues:
     - Original sprite sheets were single images, requiring manual cropping into individual frames organized in folders.
     - Sprite pixels didn’t match real image pixels (1 “fake” pixel = 3x3 real pixels), now corrected for true pixel-art fidelity.
   - Goal: Make the tool accessible online without local setup.
@@ -19,7 +19,7 @@ All notable changes to the *Animator2D* project are documented in this file. Thi
 - **Release**: Not yet released
 - **New Features**:
   - Local version running entirely on the user’s machine.
-  - Training completed using a custom dataset (`Lod34/sprite-animation`, [link](https://huggingface.co/datasets/Lod34/sprite-animation)), created by refining `pawkanarek/spraix_1024`:
+  - Training completed using a custom dataset (`Loacky/sprite-animation`, [link](https://huggingface.co/datasets/Loacky/sprite-animation)), created by refining `pawkanarek/spraix_1024`:
     - Converted sprite sheets from single images into individual frames, organized in folders.
     - Fixed pixel mismatch (1 “fake” pixel = 3x3 real pixels) for accurate pixel-art scale.
   - Modular approach in three phases:
@@ -43,7 +43,7 @@ All notable changes to the *Animator2D* project are documented in this file. Thi
   - Advanced Gradio interface with FPS control and GIF output.
 - **Issues**:
   - Animations remained incoherent despite sprite-like pixels.
-- **Status**: Not functional, deployed on Hugging Face Spaces (`Lod34/Animator2D`).
+- **Status**: Not functional, deployed on Hugging Face Spaces (`Loacky/Animator2D`).
 
 ## [Animator2D-v2-alpha] - 2025-03-03
 - **Development Started**: March 2, 2025
@@ -87,4 +87,4 @@ All notable changes to the *Animator2D* project are documented in this file. Thi
 
 **Notes**:  
 - Early versions (v1-alpha to v3-alpha) were experimental and non-functional, using `pawkanarek/spraix_1024` sprite sheets as-is, with limitations in frame organization and pixel scaling.  
-- v1 and v1.1 introduce a custom dataset (`Lod34/sprite-animation`) to address these issues, splitting v1 for local use (training done, interface in progress) and v1.1 for online deployment (in development).
+- v1 and v1.1 introduce a custom dataset (`Loacky/sprite-animation`) to address these issues, splitting v1 for local use (training done, interface in progress) and v1.1 for online deployment (in development).

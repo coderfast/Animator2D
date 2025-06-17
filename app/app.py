@@ -54,7 +54,7 @@ def generate_animation(description, base_frame_image, num_frames):
         # Carica il modello da Hugging Face
         model = Animator2DModel().to(device)
         logger.info("Modello inizializzato, caricamento pesi...")
-        weights_url = "https://huggingface.co/Lod34/Animator2D-v1.0.0/resolve/main/Animator2D-v1.0.0.pth"
+        weights_url = "https://huggingface.co/Loacky/Animator2D-v1.0.0/resolve/main/Animator2D-v1.0.0.pth"
         try:
             model.load_state_dict(torch.hub.load_state_dict_from_url(weights_url, map_location=device))
         except Exception as e:

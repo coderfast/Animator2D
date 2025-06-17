@@ -9,7 +9,7 @@ This guide describes how to use the `PROJECT_MEMORY.md` file as the central memo
 
 ## How to Use PROJECT_MEMORY.md
 1. **Review**:
-- Open `PROJECT_MEMORY.md` in the root of the GitHub repository ([https://github.com/Lod34/Animator2D](https://github.com/Lod34/Animator2D)).
+- Open `PROJECT_MEMORY.md` in the root of the GitHub repository ([https://github.com/LoackyBit/Animator2D](https://github.com/LoackyBit/Animator2D)).
 - Use the sections (Basic Info, Project Versions, Activity Logs, Generated Prompts, Additional Notes, Initial Context) to review the project status, issues, implemented solutions, and next steps.
 2. **Update**:
 - To add new details (e.g. new versions, logs, issues), edit `PROJECT_MEMORY.md` directly on GitHub or locally with a text editor.

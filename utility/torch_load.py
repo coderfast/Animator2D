@@ -13,7 +13,7 @@ from huggingface_hub import hf_hub_download
 
 # Scarica il file localmente
 model_path = hf_hub_download(
-    repo_id="Lod34/Animator2D-v1.0.0",
+    repo_id="Loacky/Animator2D-v1.0.0",
     filename="Animator2D-v1.0.0.pth"
 )
 

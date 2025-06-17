@@ -6,9 +6,9 @@
 - **Tecnologie**: PyTorch, Transformers, Gradio, Diffusers, PIL, NumPy. GPU (CUDA) quando disponibile, CPU fallback.
 - **Dataset**: 
   - Inizialmente: `pawkanarek/spraix_1024` (sprite con descrizioni, azioni, direzioni).
-  - Attualmente: Dataset personalizzato `Lod34/sprite-animation` (derivato da *Gameface*), con sprite sheet tagliati in frame individuali e organizzati in cartelle. Include `sprite_metadata.json` con descrizioni e parametri, e cartella `images` con frame numerati. Sfondo rimosso dagli sprite per evitare distrazioni durante il training. Frame di background generati dal codice *Sprite Sheet Decoder* rimossi per correggere problemi di numerazione.
-- **Stato attuale**: Nessuna versione completamente funzionante. *v3-alpha* su Hugging Face Spaces (`Lod34/Animator2D`) è l'ultima, con pixel simili a sprite ma animazioni incoerenti. *v1* (locale, training completato, interfaccia in sviluppo) e *v1.1* (online su Hugging Face, in sviluppo).
-- **Repository GitHub**: [https://github.com/Lod34/Animator2D](https://github.com/Lod34/Animator2D)
+  - Attualmente: Dataset personalizzato `Loacky/sprite-animation` (derivato da *Gameface*), con sprite sheet tagliati in frame individuali e organizzati in cartelle. Include `sprite_metadata.json` con descrizioni e parametri, e cartella `images` con frame numerati. Sfondo rimosso dagli sprite per evitare distrazioni durante il training. Frame di background generati dal codice *Sprite Sheet Decoder* rimossi per correggere problemi di numerazione.
+- **Stato attuale**: Nessuna versione completamente funzionante. *v3-alpha* su Hugging Face Spaces (`Loacky/Animator2D`) è l'ultima, con pixel simili a sprite ma animazioni incoerenti. *v1* (locale, training completato, interfaccia in sviluppo) e *v1.1* (online su Hugging Face, in sviluppo).
+- **Repository GitHub**: [https://github.com/LoackyBit/Animator2D](https://github.com/LoackyBit/Animator2D)
 
 ## Versioni del Progetto
 - **Animator2D-v1-alpha** (21-22 febbraio 2025): 
@@ -31,7 +31,7 @@
   - Training: AdamW, Cosine Annealing, 80/20 split su `pawkanarek/spraix_1024`.
   - Interfaccia: Gradio con controllo FPS e output GIF.
   - Output: Pixel sprite-like ma animazioni incoerenti.
-  - Deployment: Hugging Face Spaces (`Lod34/Animator2D`).
+  - Deployment: Hugging Face Spaces (`Loacky/Animator2D`).
 - **Animator2D-v1** (dal 6 marzo 2025):
   - Approccio: Modulare ispirato a Da Vinci Resolve:
     1. **Creation**: Creazione o importazione di uno sprite base (es. 64x64), possibilmente con Stable Diffusion per pixel-art o decomposizione personally in parti.
@@ -46,7 +46,7 @@
   - Risultati: Training su 50 epoche con prestazioni pessime, nessuna animazione coerente.
   - Stato: Interfaccia in sviluppo, training code non funzionante.
 - **Animator2D-v1.1** (dal 6 aprile 2025):
-  - Versione online su Hugging Face, utilizza dataset `Lod34/sprite-animation`.
+  - Versione online su Hugging Face, utilizza dataset `Loacky/sprite-animation`.
   - Obiettivo: Accessibilità online senza setup locale.
   - Stato: In sviluppo.
 

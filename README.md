@@ -3,7 +3,7 @@ _Last update: 6 March 2025_
 
 *Animator2D* is an AI-driven project I’ve embarked on to generate pixel-art sprite animations from textual descriptions. My goal is to create a tool that transforms prompts like “a knight in red armor attacking with a sword, facing right” into animated sequences—be it GIFs, sprite sheets, or videos—ready for indie game developers. For a detailed history of its evolution, check out [Change Log](CHANGELOG.md).
 
-Link to my Hugging Face account: [https://huggingface.co/Lod34](https://huggingface.co/Lod34)
+Link to my Hugging Face account: [https://huggingface.co/Loacky](https://huggingface.co/Loacky)
 
 ## Memory Management
 To track progress and manage project documentation, see:
@@ -31,7 +31,7 @@ I tweaked batch sizes (8-16) and learning rates (1e-4 to 2e-4), watching loss cu
 By March 2, 2025, I rewrote everything for *Animator2D-v2-alpha*. I swapped CLIP for T5, hoping for better text understanding, and added a *Frame Interpolator* for multi-frame animations. The generator grew more complex, and I upgraded the Gradio interface. Released on March 3, I deployed it to Hugging Face Spaces, only to find a “yellow ball on blue background” output. After days of debugging, I realized I’d uploaded the wrong `.pth` file. Even fixed, it didn’t work—animations were incoherent. This taught me deployment diligence, but also hinted my single-model approach might be flawed.
 
 ### A Fix with Hope: Animator2D-v3-alpha (Development & Release: Mar 6, 2025)
-On March 6, 2025, I tackled *Animator2D-v3-alpha* as a fix for v2-alpha. I kept T5 and the *Frame Interpolator*, but added *Residual Blocks* and *Self-Attention* to the generator for better detail. Training got a boost with AdamW and Cosine Annealing on an 80/20 split of `pawkanarek/spraix_1024`. The Gradio interface now featured FPS control and GIF output, and I fixed the Hugging Face import (`Lod34/Animator2D`). Pixels started looking sprite-like, but it still didn’t work—animations lacked coherence. Progress, yes; success, no.
+On March 6, 2025, I tackled *Animator2D-v3-alpha* as a fix for v2-alpha. I kept T5 and the *Frame Interpolator*, but added *Residual Blocks* and *Self-Attention* to the generator for better detail. Training got a boost with AdamW and Cosine Annealing on an 80/20 split of `pawkanarek/spraix_1024`. The Gradio interface now featured FPS control and GIF output, and I fixed the Hugging Face import (`LoackyBit/Animator2D`). Pixels started looking sprite-like, but it still didn’t work—animations lacked coherence. Progress, yes; success, no.
 
 ### Reflections on Setbacks
 Post-v3, I paused. I’d gained skills in PyTorch, dataset management, and deployment, but practical results eluded me. Was the dataset too limited? Was a single model too ambitious? This frustration led to a pivot.
